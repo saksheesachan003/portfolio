@@ -130,7 +130,7 @@ const intents = [
 const GENERIC = new Set(["app", "the", "and"]);
 const projectIndex = projects.map((p) => ({
   project: p,
-  words: [...tokenize(p.title), ...(p.aliases || [])].filter((w) => w.length >= 4 && !GENERIC.has(w)),
+  words: tokenize(p.title).filter((w) => w.length >= 4 && !GENERIC.has(w)),
 }));
 
 const describeProject = (p) => ({

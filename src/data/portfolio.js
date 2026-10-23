@@ -86,16 +86,14 @@ export const projects = [
     company: "Spinify.AI",
   },
   {
-    title: "VoxAvatar",
-    aliases: ["avatar", "talking"], // extra words the chat assistant matches on
+    title: "3D Talking Avatar",
     kind: "3D · Voice",
     featured: true,
     description:
-      "A real-time talking 3D avatar that plays a voice clip and moves its mouth to match the speech, with idle, greeting and gesture animations and head tracking that follows the camera. Pick a script — a greeting agent that introduces itself and offers help, or a pizza chat asking if you like pepperoni — and watch it deliver the lines.",
-    highlight: "Audio-driven lip-sync: Rhubarb mouth cues mapped to viseme morph targets, with adjustable smoothing",
-    stack: ["Three.js", "React Three Fiber", "Drei", "Leva", "Rhubarb Lip Sync"],
-    link: "https://voxavatar-mu.vercel.app/",
-    repo: "https://github.com/saksheesachan003/voxavatar",
+      "An interactive 3D avatar designed and rendered with Three.js, brought to life with a voice layer — it speaks responses aloud with real-time speech synthesis, turning a chat into a face-to-face conversation.",
+    highlight: "Smooth 60 fps rendering on mid-range devices",
+    stack: ["Three.js", "React", "Web Speech API", "JavaScript"],
+    link: "",
     company: "Spinify.AI",
   },
   {
