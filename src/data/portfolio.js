@@ -69,7 +69,8 @@ export const experience = [
   },
 ];
 
-// featured: true → large card. `link` is optional; leave "" to hide the button.
+// featured: true → large card. `link` (live site or repo) and `repo` (GitHub source,
+// shown as a second button) are optional; leave "" or omit to hide the button.
 // `company` marks work built for an employer — the code is private, so the card
 // shows a "Private · <company>" badge instead of a link.
 export const projects = [
@@ -85,14 +86,16 @@ export const projects = [
     company: "Spinify.AI",
   },
   {
-    title: "3D Talking Avatar",
+    title: "VoxAvatar",
+    aliases: ["avatar", "talking"], // extra words the chat assistant matches on
     kind: "3D · Voice",
     featured: true,
     description:
-      "An interactive 3D avatar designed and rendered with Three.js, brought to life with a voice layer — it speaks responses aloud with real-time speech synthesis, turning a chat into a face-to-face conversation.",
-    highlight: "Smooth 60 fps rendering on mid-range devices",
-    stack: ["Three.js", "React", "Web Speech API", "JavaScript"],
-    link: "",
+      "A real-time talking 3D avatar that plays a voice clip and moves its mouth to match the speech, with idle, greeting and gesture animations and head tracking that follows the camera. Pick a script — a greeting agent that introduces itself and offers help, or a pizza chat asking if you like pepperoni — and watch it deliver the lines.",
+    highlight: "Audio-driven lip-sync: Rhubarb mouth cues mapped to viseme morph targets, with adjustable smoothing",
+    stack: ["Three.js", "React Three Fiber", "Drei", "Leva", "Rhubarb Lip Sync"],
+    link: "https://voxavatar-mu.vercel.app/",
+    repo: "https://github.com/saksheesachan003/voxavatar",
     company: "Spinify.AI",
   },
   {
@@ -105,12 +108,13 @@ export const projects = [
     company: "Spinify.AI",
   },
   {
-    title: "Visual Flow Builder",
+    title: "Call Canvas",
     kind: "Developer Tool",
     description:
       "Drag-and-drop workflow builder with custom node types, configurable connections, Redux state and persisted configurations.",
     stack: ["React", "React Flow", "Redux"],
-    link: "",
+    link: "https://call-canvas.vercel.app/",
+    repo: "https://github.com/saksheesachan003/call-canvas",
     company: "Spinify.AI",
   },
   {
@@ -119,7 +123,8 @@ export const projects = [
     description:
       "Turns a list of company websites into verified, scored, CRM-ready leads using async scraping, email validation and explainable scoring.",
     stack: ["Python", "FastAPI", "Async scraping"],
-    link: "https://github.com/saksheesachan003/leadlens",
+    link: "https://leadlens-chi.vercel.app/",
+    repo: "https://github.com/saksheesachan003/leadlens",
   },
   {
     title: "SkyCart",
@@ -127,7 +132,8 @@ export const projects = [
     description:
       "Single-page e-commerce dashboard with authentication, product filtering and search.",
     stack: ["React", "Tailwind", "Lucide"],
-    link: "https://github.com/saksheesachan003/skycart_application",
+    link: "https://skycart-application-zi7t.vercel.app/",
+    repo: "https://github.com/saksheesachan003/skycart_application",
   },
   {
     title: "myCDA Session Feedback",
@@ -135,7 +141,7 @@ export const projects = [
     description:
       "Students and parents rate completed sessions; instructors only see an anonymised average — privacy built into the data model.",
     stack: ["Django REST", "Next.js 14", "Python"],
-    link: "https://github.com/saksheesachan003/mycda-session-feedback",
+    repo: "https://github.com/saksheesachan003/mycda-session-feedback",
   },
 ];
 
@@ -168,3 +174,18 @@ export const certifications = [
   "Claude Code — Anthropic",
   "Docker Prerequisites — KodeKloud",
 ];
+
+// The 3D avatar follows you down the page. For each section: what it says and how it poses.
+// Poses: "wave" · "think" · "point" (towards the content) · "present"
+export const avatar = {
+  model: "models/avatar.vrm", // drop your own VRoid export here
+  sections: {
+    top: { pose: "wave", line: "Hi, I'm Sakshee 👋 Scroll and I'll show you around." },
+    about: { pose: "think", line: "Short version: I usually own the whole product." },
+    experience: { pose: "point", line: "~3 years shipping to real users. Here's where." },
+    projects: { pose: "present", line: "These are the ones I'm proudest of ✦" },
+    skills: { pose: "point", line: "My everyday toolkit." },
+    education: { pose: "think", line: "Where it all started." },
+    contact: { pose: "wave", line: "Let's build something together — say hi!" },
+  },
+};

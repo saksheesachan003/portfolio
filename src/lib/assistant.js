@@ -130,7 +130,7 @@ const intents = [
 const GENERIC = new Set(["app", "the", "and"]);
 const projectIndex = projects.map((p) => ({
   project: p,
-  words: tokenize(p.title).filter((w) => w.length >= 4 && !GENERIC.has(w)),
+  words: [...tokenize(p.title), ...(p.aliases || [])].filter((w) => w.length >= 4 && !GENERIC.has(w)),
 }));
 
 const describeProject = (p) => ({
@@ -141,7 +141,12 @@ const describeProject = (p) => ({
     (p.company && !p.link
       ? `\n\nBuilt at ${p.company}, so the code is private — happy to walk through it in an interview.`
       : ""),
-  actions: p.link ? [external("View on GitHub", p.link)] : [external("All projects", "#projects")],
+  actions: p.link || p.repo
+    ? [
+        p.link && external(p.link.includes("github.com") ? "View on GitHub" : "View live", p.link),
+        p.repo && external("View on GitHub", p.repo),
+      ].filter(Boolean)
+    : [external("All projects", "#projects")],
 });
 
 export const suggestions = [

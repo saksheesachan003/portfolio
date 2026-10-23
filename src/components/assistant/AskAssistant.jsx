@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ask, suggestions, welcome } from "../../lib/assistant.js";
+import { emit, on } from "../../lib/assistantBus.js";
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isTyping = () => {
@@ -32,6 +33,18 @@ export default function AskAssistant() {
   useEffect(() => {
     if (open) inputRef.current?.focus();
   }, [open]);
+
+  // Clicking the avatar opens the chat
+  useEffect(() => on("request-open", () => setOpen(true)), []);
+
+  // Tell the avatar what the chat is doing, so it can think, then "say" the reply
+  const last = messages[messages.length - 1];
+  const phase = last.pending ? (last.text ? "talking" : "thinking") : "idle";
+  useEffect(() => {
+    emit("state", { open, phase, text: last.full || "" });
+    // last.full only changes along with phase
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, phase]);
 
   useEffect(() => {
     logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: "smooth" });

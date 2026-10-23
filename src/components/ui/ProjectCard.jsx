@@ -19,7 +19,7 @@ const reset = (e) => {
 };
 
 export default function ProjectCard({ project, index }) {
-  const { title, kind, description, highlight, stack, link, featured, company } = project;
+  const { title, kind, description, highlight, stack, link, repo, featured, company } = project;
   return (
     <article
       className={`project reveal ${featured ? "project--featured" : ""}`}
@@ -34,10 +34,19 @@ export default function ProjectCard({ project, index }) {
             Private · {company}
           </span>
         )}
-        {link && (
-          <a className="project__link" href={link} target="_blank" rel="noreferrer" aria-label={`${title} on GitHub`}>
-            ↗
-          </a>
+        {(link || repo) && (
+          <span className="project__links">
+            {repo && (
+              <a className="project__link" href={repo} target="_blank" rel="noreferrer" aria-label={`${title} on GitHub`} title="Source on GitHub">
+                {"</>"}
+              </a>
+            )}
+            {link && (
+              <a className="project__link" href={link} target="_blank" rel="noreferrer" aria-label={link.includes("github.com") ? `${title} on GitHub` : `${title} live site`} title={link.includes("github.com") ? "Source on GitHub" : "Live site"}>
+                ↗
+              </a>
+            )}
+          </span>
         )}
       </div>
       <h3>{title}</h3>

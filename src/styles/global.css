@@ -160,7 +160,8 @@ em { font-style: italic; color: var(--accent); }
 .project--featured h3 { font-size: clamp(1.7rem, 3vw, 2.2rem); }
 .project--featured p { max-width: 62ch; }
 .project__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-.project__link { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line); transition: all 0.2s; }
+.project__links { display: flex; gap: 8px; }
+.project__link { font-family: var(--mono); font-size: 0.72rem;width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line); transition: all 0.2s; }
 .project__link:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 .project h3 { font-family: var(--serif); font-size: 1.45rem; margin-bottom: 12px; }
 .project p { color: var(--muted); font-size: 0.95rem; }
@@ -371,3 +372,54 @@ kbd { font-family: var(--mono); font-size: 0.75em; padding: 1px 6px; border: 1px
 @media (prefers-reduced-motion: reduce) {
   .portrait.is-visible .portrait__frame, .portrait.is-visible img, .portrait__badge svg, .portrait__badge-dot { animation: none; }
 }
+
+/* ── Smooth scroll (Lenis) ────────────────────────────────── */
+html.lenis { scroll-behavior: auto; height: auto; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lead .word { display: inline; }
+
+/* ── 3D avatar ────────────────────────────────────────────── */
+/* Full size beside the hero; GSAP scales it into the bottom-right corner as you scroll. */
+/* The stage moves the avatar aside for the chat window; the dock inside it follows the scroll. */
+.avatar-stage {
+  position: fixed; inset: 0; z-index: 40; pointer-events: none;
+  transform-origin: 100% 100%; transition: transform 0.9s var(--ease);
+}
+.avatar-stage.is-chatting { transform: translateX(calc(-1 * min(400px, 100vw - 32px) - 34px)); }
+.avatar-stage.is-chatting.is-big { transform: translateX(calc(-1 * min(400px, 100vw - 32px) - 34px)) scale(0.5); }
+.avatar-dock {
+  position: absolute; right: 0; bottom: 0;
+  width: min(44vw, 680px); height: 100vh;
+  pointer-events: none; transform-origin: 100% 100%;
+  opacity: 0; transition: opacity 1.2s var(--ease);
+  -webkit-mask-image: linear-gradient(to top, transparent, #000 16%);
+  mask-image: linear-gradient(to top, transparent, #000 16%);
+}
+.avatar-dock.is-ready { opacity: 1; }
+.avatar-dock canvas { width: 100%; height: 100%; display: block; }
+
+/* Invisible click target over the avatar that opens the chat */
+.avatar-hit {
+  position: fixed; left: 0; top: 0; z-index: 42;
+  padding: 0; border: 0; background: none; cursor: pointer; border-radius: 40% 40% 20% 20%;
+}
+.avatar-hit:hover ~ .avatar-bubble { opacity: 1; }
+.avatar-stage .avatar-dock { transition: opacity 1.2s var(--ease), filter 0.3s; }
+.avatar-stage:has(~ .avatar-hit:hover) .avatar-dock { filter: brightness(1.12) drop-shadow(0 0 18px rgba(242, 184, 128, 0.35)); }
+@media (prefers-reduced-motion: reduce) { .avatar-stage { transition: none; } }
+
+/* The wireframe sphere becomes a soft halo behind the avatar */
+.has-avatar .hero__scene { opacity: 0.45; transition: opacity 1.2s; }
+
+.avatar-bubble {
+  position: fixed; left: 0; top: 0; z-index: 41; margin: 0;
+  max-width: 250px; padding: 10px 14px;
+  background: rgba(21, 23, 29, 0.92); backdrop-filter: blur(10px);
+  border: 1px solid var(--line); border-radius: 14px 14px 4px 14px;
+  font-size: 0.86rem; line-height: 1.45; color: var(--text);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  pointer-events: none; opacity: 0; transition: opacity 0.3s;
+}
+.avatar-bubble.is-on { opacity: 1; }
+.avatar-bubble.is-corner { max-width: 200px; font-size: 0.8rem; border-radius: 14px 14px 4px 14px; }
+.avatar-bubble:not(.is-corner) { border-radius: 14px 4px 14px 14px; }

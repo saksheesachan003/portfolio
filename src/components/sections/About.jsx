@@ -9,7 +9,12 @@ export default function About() {
         <SectionHeading index="01" title="About" />
         <div className="about">
           <div className="about__text reveal">
-            <p className="lead">{profile.intro}</p>
+            {/* Split into words so the scroll effect can light them up one by one */}
+            <p className="lead">
+              {profile.intro.split(" ").map((w, i) => (
+                <span key={i} className="word">{w} </span>
+              ))}
+            </p>
             {about.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
