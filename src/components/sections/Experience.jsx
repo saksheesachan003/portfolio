@@ -41,7 +41,16 @@ export default function Experience() {
               </div>
               <div className="timeline__body">
                 <h3>
-                  {job.role} <span className="at">@ {job.company}</span>
+                  {job.role}{" "}
+                  <span className="at">
+                    @{" "}
+                    {job.link ? (
+                      <a href={job.link} target="_blank" rel="noreferrer">{job.company} ↗</a>
+                    ) : (
+                      job.company
+                    )}
+                  </span>
+                  {job.award && <span className="award">🏆 {job.award}</span>}
                 </h3>
                 <ul>
                   {job.points.map((p, i) => (

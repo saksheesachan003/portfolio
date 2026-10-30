@@ -23,13 +23,16 @@ export default function Contact() {
           Let's build <em>something</em> together.
         </h2>
         <p className="contact__sub">
-          I'm an immediate joiner, open to relocation and on-site roles. The fastest way to reach me is email.
+          Hiring for a full-stack or AI product role? I can start immediately and am open to relocation. The fastest way to reach me is email.
         </p>
         <div className="contact__actions">
           <a className="btn" href={`mailto:${profile.email}`}>{profile.email}</a>
           <button className="btn btn--ghost" onClick={copyEmail}>
             {copied ? "Copied ✓" : "Copy email"}
           </button>
+          <a className="btn btn--ghost" href={profile.resume} download>
+            Download résumé ↓
+          </a>
         </div>
         <ul className="contact__links">
           <li><a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a></li>

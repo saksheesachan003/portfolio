@@ -48,7 +48,7 @@ export default function About() {
 
             <div className="about__card reveal" style={{ "--i": 2 }}>
               <p className="mono">currently</p>
-              <p>Software Engineer @ <strong>Spinify.AI</strong></p>
+              <p>Freelance @ <strong>Macrostays</strong></p>
               <p className="mono">based in</p>
               <p>{profile.location}</p>
               <p className="mono">focus</p>

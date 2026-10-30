@@ -19,7 +19,7 @@ const reset = (e) => {
 };
 
 export default function ProjectCard({ project, index }) {
-  const { title, kind, description, highlight, stack, link, repo, featured, company } = project;
+  const { title, kind, description, highlight, stack, link, repo, featured, company, image } = project;
   return (
     <article
       className={`project reveal ${featured ? "project--featured" : ""}`}
@@ -49,6 +49,11 @@ export default function ProjectCard({ project, index }) {
           </span>
         )}
       </div>
+      {image && (
+        <div className="project__shot">
+          <img src={image} alt={`Screenshot of ${title}`} loading="lazy" decoding="async" />
+        </div>
+      )}
       <h3>{title}</h3>
       <p>{description}</p>
       {highlight && <p className="project__highlight">✦ {highlight}</p>}

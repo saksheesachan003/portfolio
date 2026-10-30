@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { profile, stats } from "../../data/portfolio.js";
 import RotatingText from "../ui/RotatingText.jsx";
 import CountUp from "../ui/CountUp.jsx";
+import { emit } from "../../lib/assistantBus.js";
 
 // Three.js is code-split so the text paints first.
 const HeroScene = lazy(() => import("../three/HeroScene.jsx"));
@@ -46,7 +47,13 @@ export default function Hero() {
         <div className="hero__actions rise" style={{ "--d": "940ms" }}>
           <a className="btn" href="#projects">See my work</a>
           <a className="btn btn--ghost" href="#contact">Get in touch</a>
+          <button className="btn btn--ghost" onClick={() => emit("request-open")}>
+            Ask my AI assistant →
+          </button>
         </div>
+        <p className="hero__hint mono rise" style={{ "--d": "1000ms" }}>
+          or press <kbd>/</kbd> anywhere
+        </p>
 
         <dl className="stats rise" style={{ "--d": "1060ms" }}>
           {stats.map((s) => (

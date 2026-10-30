@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useActiveSection } from "../../hooks/useActiveSection.js";
+import { profile } from "../../data/portfolio.js";
 
 const links = [
   { href: "#about", label: "About" },
@@ -51,6 +52,11 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <a href={profile.resume} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
+              Résumé ↗
+            </a>
+          </li>
           <li>
             <a className="btn btn--small" href="#contact" onClick={() => setOpen(false)}>
               Let's talk

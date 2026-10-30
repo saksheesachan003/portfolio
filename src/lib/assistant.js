@@ -54,7 +54,7 @@ const intents = [
       const ai = skills.find((s) => s.group === "AI");
       return {
         text:
-          `${about[1]}\n\nAI toolkit: ${ai ? ai.items.join(", ") : "LLM integration"}.` +
+          `${about[2]}\n\nAI toolkit: ${ai ? ai.items.join(", ") : "LLM integration"}.` +
           "\n\nFun fact: this assistant is a mini version of the same idea — intent classification, running in your browser.",
         actions: [external("AI projects", "#projects")],
       };
@@ -62,7 +62,7 @@ const intents = [
   },
   {
     id: "experience",
-    keywords: ["experience", "work", "job", "company", "spinify", "celebal", "years", "career", "intern", "role", "current"],
+    keywords: ["experience", "work", "job", "company", "spinify", "celebal", "macrostays", "freelance", "freelancing", "years", "career", "intern", "role", "current"],
     answer: () => ({
       text:
         "About 3 years across product engineering and data:\n\n" +
@@ -120,8 +120,8 @@ const intents = [
     id: "resume",
     keywords: ["resume", "cv", "pdf", "download"],
     answer: () => ({
-      text: "Her résumé is shared on request — drop an email or a LinkedIn message and she'll send it over.",
-      actions: [external("Email", `mailto:${profile.email}`), external("LinkedIn", profile.linkedin)],
+      text: "Here's her résumé as a PDF. Questions about it? Email or LinkedIn is the quickest way to reach her.",
+      actions: [external("Open résumé", profile.resume), external("Email", `mailto:${profile.email}`), external("LinkedIn", profile.linkedin)],
     }),
   },
 ];
